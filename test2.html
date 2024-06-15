@@ -1,0 +1,202 @@
+<style>
+    .books-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: flex-start;
+        overflow-y: auto;
+        padding: 20px;
+        width: 100%;
+    }
+    .book {
+        cursor: pointer;
+        margin: 10px;
+        padding: 10px;
+        background-color: #F5F5F5;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        width: 210px;
+        height: 550px; /* Set a fixed height for each book */
+        box-sizing: border-box;
+        position: relative;
+    }
+    .cover {
+        width: 180px;
+        height: auto;
+        object-fit: cover;
+        margin-bottom: 10px;
+    }
+    .cover:hover {
+        opacity: 0.8;
+    }
+    .book-details {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        flex-grow: 1;
+        line-height: 24px;
+        text-align: left;
+    }
+    .view-count {
+        margin-top: 5px;
+        font-size: 14px;
+        color: #555;
+    }
+    .bookname {
+        font-size: 18px;
+        font-weight: 900;
+        color: #36505F;
+    }
+    .tap {
+        position: absolute;
+        top: 1%;
+        left: 2%;
+        background-color: #F5F5F5;
+        padding: 5px;
+        color: #36505F;
+        font-weight: 900;
+    }
+</style>
+</head>
+<body>
+    <div id="app">
+        <div class="books-container">
+            <div v-for="book in books" :key="book.isbn" class="book" @click="handleBookClick(book)">
+                <a :href="book.link" target="_blank">
+                    <img :src="book.cover" class="cover" :alt="`${book.name} 封面`">
+                </a>
+                <div class="tap">{{ book.type }}</div>
+                <div class="book-details">
+                    <div class="bookname">{{ book.name }}</div>
+                    <br>
+                    <div>作者: {{ book.author }}</div>
+                    <div>ISBN: {{ book.isbn }}</div>
+                </div>
+                <div class="view-count">瀏覽人數: {{ book.views }}</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                books: [
+                { type:'電子書',name: '大員記刊 創刊號', author: '人文社會科學中心', isbn: 'tayouan01', cover: 'https://chass.ncku.edu.tw/var/file/11/1011/img/188914484.jpg', link: 'https://heyzine.com/flip-book/c28b0981d3.html', views: 0 },
+
+                { type: '電子書', name: 'Tibetan and Uyghur Refugees in the New Colonial Era: Reflection on the rise of Chinese Colonialism', author: 'Dolma Tsering', isbn: '9789865635770', cover: 'https://chass.ncku.edu.tw/var/file/11/1011/img/102040055.jpg', link: 'https://heyzine.com/flip-book/aa6f214064.html', views: 0 },
+
+                { type:'電子書',name: '樂智竹田，共下來尞：開放式失智症照顧的理念與實踐', author: '人文社會科學中心', isbn: '9786267117903', cover: 'https://chass.ncku.edu.tw/var/file/11/1011/img/416453467.jpg', link: 'https://heyzine.com/flip-book/d742071706.html', views: 0 },
+
+                { type:'電子書',name: '「深耕有成」年報', author: '人文社會科學中心', isbn: '9786267227084', cover: 'https://chass.ncku.edu.tw/var/file/11/1011/img/295647944.svg', link: 'https://www.usr-c.chass.ncku.edu.tw/_files/ugd/fb5084_e89d2121f9294af48be9e18732f801bb.pdf', views: 0 },
+
+{ type:'電子書',name: '咱行ê路 牽手成行', author: '人文社會科學中心', isbn: '9786269600403', cover: 'https://chass.ncku.edu.tw/var/file/11/1011/img/714588472.png', link: 'https://issuu.com/ncku.usr/docs/ncku_usr_annualreport_2021.pdf', views: 0 },
+
+{ type:'電子書',name: '入世學術人', author: '人文社會科學中心', isbn: '9789860670400', cover: 'https://chass.ncku.edu.tw/var/file/11/1011/img/486843017.jpg', link: 'https://issuu.com/ncku.usr/docs/_2020_web', views: 0 },
+
+{ type:'電子報',name: '南視角#1', author: '人文社會科學中心', isbn: 'southernperspective01', cover: 'https://chass.ncku.edu.tw/var/file/11/1011/img/486743155.svg', link: 'https://chass.ncku.edu.tw/p/405-1011-237038,c28504.php?Lang=zh-tw', views: 0 },
+
+
+{ type:'電子報',name: '南視角#2', author: '人文社會科學中心', isbn: 'southernperspective02', cover: 'https://chass.ncku.edu.tw/var/file/11/1011/img/ebook-02.svg', link: 'https://chass.ncku.edu.tw/p/412-1011-28740.php?Lang=zh-tw', views: 0 },
+
+{ type:'電子報',name: '南視角#3', author: '人文社會科學中心', isbn: 'southernperspective03', cover: 'https://chass.ncku.edu.tw/var/file/11/1011/img/ebook-03.svg', link: 'https://chass.ncku.edu.tw/p/412-1011-29246.php?Lang=zh-tw', views: 0 },
+
+{ type:'電子報',name: '南視角#4', author: '人文社會科學中心', isbn: 'southernperspective04', cover: 'https://chass.ncku.edu.tw/var/file/11/1011/img/604452906.svg', link: 'https://chass.ncku.edu.tw/p/412-1011-29432.php?Lang=zh-tw', views: 0 },
+
+ { type:'論文集',name: '「近代東亞體育世界與身體」論文集', author: '徐珊惠', isbn: '9786269810451', cover: 'https://chass.ncku.edu.tw/var/file/11/1011/img/212525627.jpg', link: 'https://www.books.com.tw/products/0010982235', views: 0 },
+
+{ type:'論文集',name: '「多聲道的台灣共同體」論文集', author: '陳麗君', isbn: '9780965635787', cover: 'https://chass.ncku.edu.tw/var/file/11/1011/img/626613929.jpg', link: 'https://chass.ncku.edu.tw/var/file/11/1011/img/626613929.jpg', views: 0 },
+
+                 { type:'論文集',name: '「沒有歷史的人」論文集', author: '謝仕淵', isbn: '9786269600496', cover: 'https://chass.ncku.edu.tw/var/file/11/1011/img/763232505.jpg', link: 'https://chass.ncku.edu.tw/var/file/11/1011/img/763232505.jpg', views: 0 },
+
+                 { type:'專書',name: '「臺灣與各地寺廟之美」專書', author: '陳益源', isbn: '9789869775366', cover: 'https://chass.ncku.edu.tw/var/file/11/1011/img/176155093.jpg', link: 'https://www.books.com.tw/products/0010895152', views: 0 },
+
+                 { type:'論文集',name: '成為台灣人 遷徙、跨界與多元故鄉', author: '林從一', isbn: '9789860670424', cover: 'https://chass.ncku.edu.tw/var/file/11/1011/img/315209585.jpg', link: 'https://chass.ncku.edu.tw/var/file/11/1011/img/315209585.jpg', views: 0 },
+
+                 { type:'專書',name: '臺灣虎爺信仰研究及其他', author: '陳益源', isbn: '9789869410526', cover: 'https://chass.ncku.edu.tw/var/file/11/1011/img/733857912.jpg', link: 'https://www.books.com.tw/products/0010764245', views: 0 },
+
+                 { type:'專書',name: '科舉制度在金門', author: '陳益源', isbn: '9789860509809', cover: 'https://chass.ncku.edu.tw/var/file/11/1011/img/678766270.jpg', link: 'https://www.govbooks.com.tw/books/111460', views: 0 },
+
+            
+
+
+                 { type:'論文集',name: '媒介現代：冷戰中的台港文藝國際學術研討會', author: '游勝冠', isbn: '9789869234283', cover: 'https://chass.ncku.edu.tw/var/file/11/1011/img/book-04.jpg', link: 'https://www.books.com.tw/products/0010740765', views: 0 },
+
+
+                 { type:'專書',name: '東亞海域網絡與港市社會', author: '鄭永常', isbn: '9789869234238', cover: 'https://chass.ncku.edu.tw/var/file/11/1011/img/788604559.jpg', link: 'https://www.books.com.tw/products/0010709453', views: 0 },
+
+                 { type:'專書',name: '閩南與越南', author: '陳益源、裴光雄', isbn: '9789868527775', cover: 'https://chass.ncku.edu.tw/var/file/11/1011/img/104982560.jpg', link: 'https://chass.ncku.edu.tw/var/file/11/1011/img/104982560.jpg', views: 0 },
+
+                 { type:'專書',name: '府城大觀音亭與觀音信仰研究', author: '陳益源', isbn: '9789866178948', cover: 'https://chass.ncku.edu.tw/var/file/11/1011/img/706843138.jpg', link: 'https://www.books.com.tw/products/0010674028', views: 0 },
+
+                 { type:'論文集',name: '2014金門學：國際學術研討會', author: '陳益源、裴光雄', isbn: '9789860433555', cover: 'https://chass.ncku.edu.tw/var/file/11/1011/img/337235748.jpg', link: 'https://www.govbooks.com.tw/books/103743', views: 0 },
+
+                 { type:'專書',name: '周懋琦、祀典興濟宮與保生大帝信仰', author: '陳益源', isbn: '978986040038', cover: 'https://chass.ncku.edu.tw/var/file/11/1011/img/885947763.jpg', link: 'https://chass.ncku.edu.tw/var/file/11/1011/img/885947763.jpg', views: 0 },
+
+                 { type:'論文集',name: '2011閩南文化國際學術研討會', author: '陳益源、裴光雄', isbn: '9789868819429', cover: 'https://chass.ncku.edu.tw/var/file/11/1011/img/book-02.jpg', link: 'https://researchoutput.ncku.edu.tw/en/publications/2011%E9%96%A9%E5%8D%97%E6%96%87%E5%8C%96%E5%9C%8B%E9%9A%9B%E5%AD%B8%E8%A1%93%E7%A0%94%E8%A8%8E%E6%9C%83%E8%AB%96%E6%96%87%E9%9B%86', views: 0 },
+
+                 { type:'論文集',name: '第12屆國際亞細亞民俗學會年會暨東亞端午文化國際學術研討會', author: '陳益源、裴光雄', isbn: '9789868819412', cover: 'https://chass.ncku.edu.tw/var/file/11/1011/img/184316979.jpg', link: 'https://findbook.com.tw/9789868819412', views: 0 },
+
+                 { type:'論文集',name: '2012台灣金瓶梅國際學術研討會', author: '陳益源、裴光雄', isbn: '9789866178641', cover: 'https://chass.ncku.edu.tw/var/file/11/1011/img/762685038.jpg', link: 'https://www.books.com.tw/products/0010589467', views: 0 },
+
+                 { type:'論文集',name: '海港．海難．海盜：海洋文化', author: '鄭永常', isbn: '9789866178573', cover: 'https://chass.ncku.edu.tw/var/file/11/1011/img/791237164.jpg', link: 'https://www.eslite.com/product/1001116532301396', views: 0 },
+
+                 { type:'論文集',name: '2012年金門學國際學術研討會', author: '陳益源', isbn: '9789860353532', cover: 'https://chass.ncku.edu.tw/var/file/11/1011/img/712696093.jpg', link: 'https://www.sanmin.com.tw/product/index/003668139', views: 0 },
+
+                 { type:'專書',name: '南管曲詞現代化之整理研究(二)', author: '王三慶、魏金泉', isbn: '9789860452921', cover: 'https://chass.ncku.edu.tw/var/file/11/1011/img/books2-04.jpg', link: 'https://books.google.com.tw/books/about/%E5%8D%97%E7%AE%A1%E6%9B%B2%E8%A9%9E%E7%8F%BE%E4%BB%A3%E5%8C%96%E4%B9%8B%E6%95%B4%E7%90%86%E7%A0%94%E7%A9%B6.html?id=VgrZjgEACAAJ&redir_esc=y', views: 0 },
+
+                 { type:'專書',name: '南管曲詞現代化之整理研究(一)', author: '王三慶、魏金泉', isbn: '9789860438277', cover: 'https://chass.ncku.edu.tw/var/file/11/1011/img/books2-03.jpg', link: 'https://books.google.com.tw/books/about/%E5%8D%97%E7%AE%A1%E6%9B%B2%E8%A9%9E%E7%8F%BE%E4%BB%A3%E5%8C%96%E4%B9%8B%E6%95%B4%E7%90%86%E7%A0%94%E7%A9%B6.html?id=VgrZjgEACAAJ&redir_esc=y', views: 0 },
+
+                 { type:'專書',name: '汕尾本車鼓戲弄詞文之現代化整理研究', author: '王三慶', isbn: '9789860438185', cover: 'https://chass.ncku.edu.tw/var/file/11/1011/img/books2-02.jpg', link: 'https://books.google.com.tw/books/about/%E6%B1%95%E5%B0%BE%E6%9C%AC.html?id=mafDDAEACAAJ&redir_esc=y', views: 0 },
+
+                 { type:'專書',name: '閩南信仰與地方文化', author: '黃文車', isbn: '9789860400045', cover: 'https://chass.ncku.edu.tw/var/file/11/1011/img/367778343.jpg', link: 'https://www.eslite.com/product/1001123462305873', views: 0 },
+
+                 { type:'專刊',name: '東亞體育世界的臺日運動交流國際展', author: '謝仕淵、劉維瑛、林欣楷', isbn: '9789865324292', cover: 'https://chass.ncku.edu.tw/var/file/11/1011/img/863845146.jpg', link: 'https://www.books.com.tw/products/0010909404?loc=P_0003_009', views: 0 },
+
+                 { type:'專書',name: '微光成炬', author: '游素玲、徐珊惠、陳麗君、吳昭儀', isbn: '9789865635619', cover: 'https://chass.ncku.edu.tw/var/file/11/1011/img/book-03.jpg', link: 'https://www.govbooks.com.tw/books/135041', views: 0 },
+
+                 { type:'專書',name: '邊緣主體：性別與身分認同政治', author: '王穎、邱大昕、胡郁盈等', isbn: '9789860527421', cover: 'https://chass.ncku.edu.tw/var/file/11/1011/img/534384029.jpg', link: 'https://www.books.com.tw/products/0010759346', views: 0 },
+                ]
+            },
+            created() {
+                this.loadViews();
+            },
+            methods: {
+                loadViews() {
+                    this.books.forEach(book => {
+                        fetch(`http://localhost:3000/books/${book.isbn}`)
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.views !== undefined) {
+                                    book.views = data.views;
+                                }
+                            })
+                            .catch(error => {
+                                console.error('獲取瀏覽次數錯誤:', error);
+                            });
+                    });
+                },
+                incrementView(isbn) {
+                    fetch(`http://localhost:3000/books/${isbn}/increment`, { method: 'POST' })
+                        .then(response => response.json())
+                        .then(data => {
+                            const book = this.books.find(b => b.isbn === isbn);
+                            if (book && data.views !== undefined) {
+                                book.views = data.views;
+                            }
+                        })
+                        .catch(error => {
+                            console.error('增加瀏覽次數錯誤:', error);
+                        });
+                },
+                handleBookClick(book) {
+                    this.incrementView(book.isbn);
+                    window.open(book.link, '_blank');
+                }
+            }
+        });
+    </script>
+</body>
